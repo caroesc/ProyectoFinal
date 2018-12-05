@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+         <title> Práctica 5 </title>
+        <meta name="description" content="Enlaces">
+        <style> body {background-color: lightgray; font-stretch: 1.7em; font-size: 25&}
+        </style>
+        <style>
+			a:link    {color:green; background-color:transparent; text-decoration:none}
+			a:visited {color:pink; background-color:transparent; text-decoration:none}
+			a:hover   {color:red; background-color:transparent; text-decoration:underline}
+			a:active  {color:yellow; background-color:transparent; text-decoration:underline}
+		</style> 
+    </head>
+    <body>
+        <div style="background-color: white; margin: 10% 5% 10%; padding: 50px; height: 600;">
+        <p style="color: red; text-align: left; font-size: 20px;"><u>UBUNTU</u></p>
+        <ol type="1" style="color: black">
+                <A HREF="#SALTO1"><li>Configuracion de red</li> </A>
+                <A HREF="#SALTO2"><li>Descargas</li></A>
+                <A HREF="#SALTO3"><li>Clonancion</li></A>
+                <A HREF="#SALTO4"><li>Configuracion de los servidores</li></A>
+                <A HREF="#SALTO5"><li>Configuracion del VIrtual Host</li></A>
+            </ol>
+        
+
+            <A NAME="SALTO1"> <p>Configuracion de red</p></A>
+        Lo primero que hay que hacer es hacer la máquina virtual, una vez que la tenemos hecha, debemos configurar la red que después será necesaria para ver lo que tenemos enlo local en el navegador<br>
+            <img src="Red1.png"><br>
+        Lo primero es seleccionar la máquina y dar click en "Configuración", ahi dentro debes entrar al apartado de "Red".<br>
+            <img src="Red2.png"><br>
+        Dentro del apartado de "Red", debe entrar al "Apartador 2" para configurar el adaptador y habilitar los adaptadores.<br>
+            <img src="Red3.png"><br>
+         
+            
+            <A NAME="SALTO2"> <p>Descargas </p> </A>     
+        Al iniciar la máquina virtual nos va pedir nuestro usuario y contraseña que fueron creados al instalar el sistema de Ubuntu. Para ver los paquetes es necesario ver cuáles son los paquetes que tienen actualizaciones es necesario agregar el siguiente comando "apt-get update", es necesario que siempre que querramos descargar algo, nuestra máquina este conectada a una red de Wifi.<br>
+            <img src="0.1.png"><br>
+        Ya que nos muestren los paquetes ponemos el comando "apt-get upgrade" para actualizar o descargar los paquetes.<br>
+            <img src="0.2.png"><br>
+        Ya que los paquetes esten actualizados, vamos a descargar PHP, MySQL Serve, Apache y PHP-MySQL, vamos añadir el comando "sudo apt-install php mysql-server apache2 php-mysql", se pueden buscar por separado, pero para hacerlo más fácil lo buscaremos todo junto.<br>
+            <img src="1.png"><br>
+        Este paso es solo para verificar que las redes si hayan quedado bien configuradas, nos deberán aparecer tres ip´s (la local, la de la red y la que está de anfitriona), para ello agregamos el comando "ifconfig"<br>
+            <img src="2.1.png"><br>
+        El siguiente paso es verificar que la red si haya sido bien configurada.<br>
+        El primer paso es ingresar la ip que está en "enp0s8" en nuestro navegador de preferencia, en este caso la IP es la "192.168.7.3".<br>
+            <img src="ifconfig1.png"><br>
+        El resaultado debe ser el siguiente:<br>
+            <img src="ifconfig2.png"><br>
+        
+            
+        <A NAME="SALTO3"> <p>Clonación</p> </A>     
+        Para que podamos clonar los repositorios de GitHub, es necesario que tengamos activos los siguientes servicios: Apache y MySQL, deberás añadir el siguiente comando para que este sea activado, "sudo service apache2 start" y para el MySQL "sudo service mysql start"
+            <img src="2.2.png"><br>
+        Verificamos que apache esté funcionando, añadimos el comando "service--status all | grep apache2".
+            <img src="3.png"><br>
+        Después de esta verificación podemos continuar con la clonación del repositorio, es necesarioi incluir toda la URL del archivo. El comando a utilizar es "sudo git cle hhtp://github.com/dgeti-cetis108/Programacion-M4S2-2018.<br>
+            <img src="4.png"><br>
+        Ahora cambiaremos el nombre de la carpeta a uno que sea mas sencillo con el comando "sudo mv Programacion-M4S2-2018/library.com", el nuevo nombre será "library.com".
+            <img src="5.png"><br>
+        
+            
+        <A NAME="SALTO4"><p>Configuración de los servidores </p> </A>     
+        El primer paso es crear el usuario library, para poder accedaer a ella desde el navegador, el primer paso es movermnos a la carpeta "bd" que se encuentra en dentro de library, después añadiremosel siguiente comando "cd library.com/db". Ya que sea confirmado que estamos dentro, el siguiente paso es que nos muestren el contenido de la base de dato, para ello es necesario que añadamos el comando "cat libary.sql".<br>
+            <img src="7.png"><br>
+        Ahora debemos movernos a MySQL, para eso pondremos el comando "sudo -i".<br>
+            <img src="8.png"><br>
+        Dentro de MySQL nuestro usuario no será nuestro nombre si no "root", es necesario escribir el comando "mysql" para entrar a mysql.<br>
+            <img src="10.png"><br>
+        El siguiente paso es crear un usuario dentro de MySQL, debes incluir el siguiente comando "create user 'nombredeusuario'@'localhost' identified by 'contraseña';".<br>
+            <img src="13.png"><br>
+        Para que el usuario pueda interactuar con la base de datos, es necesario darle privilegios con el "*", debes añadir el comando "grant all on library.* to 'nombredeusuario'@'localhost';". Para salir de MySQL esbribimos el comando "exit" y para volver a donde estabamos volvemos añadir el comando "exit".<br>
+            <img src="14.png"><br>
+        Para estar seguros que la configuración haya quedado bien, debemos probar la conexion del usuario con MySQL con el comando "mysql -u nombredeusuario -p".<br>
+            <img src="15.png"><br>
+        El siguiente paso es movernos a la carpeta "clasess" con el comando "cd library.com/classes".<br>
+            <img src="16.png"><br>
+        Ya que estamos en la carpeta classes, vamos a añadir el comando  "sudo nano conexion.php" para entrar a nano y que nos muestre el archivo que tenemos en MySQL.<br>
+            <img src="17.png"><br>
+        Nos mostrará el siguiente código.<br>
+            <img src="18.png"><br>
+        Ahora lo que haremos será cambiar los datos del usuario, con los datos que pusimos al crear el usuario en MySQL, solo  cambiaremos el "username" y la "password", guardaremos los cambios con "ctrl" + "o" después enter, y para salir usamos "ctrl" + "x".<br>
+            <img src="19.png"><br>
+        
+    
+        
+        <A NAME="SALTO5"> <p>Configuracion del VirtualHost</p> </A>  
+        Es necesario que configuremos nuestro VirtualHost de nuestro equipo Windows, para eso buscamos el bloc de notas, damos click derecho y lo ejecutamos como administrador, después abrimos el archivo host que se encuentra en la siguiente ruta.<br>
+            <img src="v2.png"><br>
+        De la lista que nos aparece de todos los archivos, vamos a abrir el archivo hosts.<br>
+            <img src="v4.png"><br>
+        El siguiente paso es agregar la IP que nos dio la máquina ("192.168.7.3") y el nombre de la carpeta ("library.com").<br>
+            <img src="v5.png"><br>
+        El paso anterior fue configurar el virtuel host de nuestra máquina windows, ahora el siguiente es configurar el de nuestra máquina virtual Ubuntutu, lo primero ue hay que hacer es cambiarnos a la carpeta "sites available", con el comando  "cd/etc/apache2/sites-available", y nos aparecerá lo siguiente.<br>
+            <img src="vh1.1.png"><br>
+        Ahora debemos entrar a nano para configurar el archivo, con el comando "sudo nano library.com.conf".<br>
+            <img src="vh2.2.png"><br>
+        El archivo aparecerá en blanco y debes agregarle el siquiente código. El correo varia, ya que es el que cada quien tenga. Recueerda guardar los cambios con la tecla "ctrl" + "o" y después enter, y para salir "ctrl" + "X".<br>
+            <img src="vh4.png"><br>
+        El siguiente paso es reiniciar Apache con el comando "sudo service apache2 restart". Si está bien deberá salir lo siguiente.<br>
+            <img src="vh5.5.png"><br>
+        Ahora que tenemos configurado el archivo "library.com.conf", vamos a configurar el archivo "host", es necesario entrar a nano escribiendo  el comando "sudo nano /etc/host"<br>
+            <img src="vh7.7.png"><br>
+        Igual que en el archivo de "library.com.conf" nos aparecerá en blanco y le añadiremos el siguiente código, para poner la IP.Recuerda guardar los cambios con el "ctrl" + "o"y después preciona la tecla "enter" y para salir "ctrl" + "x".<br>
+            <img src="vh8.png"><br>
+        Ahora sí lo último que nos falta es es entrar al navegador y escribimos "library.com", nos deberá aparecer lo siguiente.<br>
+            <img src="vh10.png"><br>
+            
+        
+        
+          
+    </body>
+</html>
